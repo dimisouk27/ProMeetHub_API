@@ -1,7 +1,7 @@
-package com.promeethub_api.services;
+package com.promeethub_api.businessLayer.services;
+
 
 import java.util.List;
-
 public interface BaseService<Entity, ID> {
 
     List<Entity> getAll();

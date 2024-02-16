@@ -5,7 +5,6 @@ import com.promeethub_api.domain.entities.UserEntity;
 import com.promeethub_api.dal.repositories.UserRepository;
 import com.promeethub_api.businessLayer.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +15,6 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final AuthenticationManager authenticationManager;
     private final JWTProvider jwtProvider;
     private final PasswordEncoder passwordEncoder;
 

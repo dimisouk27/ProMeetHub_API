@@ -42,6 +42,11 @@ public class UserEntity implements UserDetails {
     protected UserRole role;
     //protected boolean enabled;// pour la suppression de compte
 
+    public UserEntity(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.toString()));

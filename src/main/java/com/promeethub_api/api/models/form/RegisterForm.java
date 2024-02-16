@@ -17,29 +17,21 @@ public record RegisterForm(
         @NotBlank @Email String email,
         @Password String password,
         @NotBlank @Tel String phoneNumber,
-        @Valid @NotNull AddressForm addressForm //not null parce que c'est un record, pour les string on peut mettre @NotBlank
+        @Min(1) int streetNumber,
+        @NotBlank String street,
+        @Min(1) int zipCode,
+        @NotBlank String city,
+        @NotBlank String country
+
 ) {
     public UserEntity toEntity() {
         return  switch (role){
             case ADMIN -> null;
             case SERVICE_PROVIDER ->
-                new ServiceProviderEntity(lastName, firstName, email, password, phoneNumber, addressForm.ToEmbeddable());
+                new ServiceProviderEntity(lastName, firstName, email, password, phoneNumber, new Address(street, streetNumber, city, zipCode, country));
 
             case CLIENT ->
-                new ClientEntity(lastName, firstName, email, password, phoneNumber, addressForm.ToEmbeddable());
+                new ClientEntity(lastName, firstName, email, password, phoneNumber, new Address(street, streetNumber, city, zipCode, country));
         };
-    }
-
-    public record AddressForm(
-            @Min(1) int streetNumber,
-            @NotBlank String street,
-            @Min(1) int zipCode,
-            @NotBlank String city,
-            @NotBlank String country
-    ){
-        public Address ToEmbeddable(){
-            return new Address( street,streetNumber,city, zipCode, country);
-        }
-
     }
 }

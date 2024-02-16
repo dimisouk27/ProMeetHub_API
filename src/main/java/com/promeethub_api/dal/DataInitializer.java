@@ -17,7 +17,7 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        UserEntity user = new UserEntity(null, "admin", "admin","admin@admin.be", "test1234=!", null, null, UserRole.ADMIN);
+        UserEntity user = new UserEntity(null, "admin", "admin","admin@admin.be", "Test1234=!", null, null, UserRole.ADMIN);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
 

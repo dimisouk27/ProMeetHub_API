@@ -9,7 +9,8 @@ public class EmailValidator implements ConstraintValidator<Email,String> {
     public boolean isValid(String value, ConstraintValidatorContext context) {
         if(value == null)
             return false;
-        return value.matches("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");// email pattern validation using regex expression
+        return value.matches("^\\w+([.-]?\\w+)*@\\w+([.-]?\\w+)*(.\\w{2,3})+$");
+
 
     }
 }

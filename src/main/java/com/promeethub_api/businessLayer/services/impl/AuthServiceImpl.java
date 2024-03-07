@@ -16,6 +16,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
@@ -48,6 +50,8 @@ public class AuthServiceImpl implements AuthService {
     public AuthDTO register(UserEntity user) {
         if (userRepository.findByEmail(user.getEmail()).isPresent())
             throw new EntityAlreadyExistsException("email", user.getEmail());
+        if(userRepository.existsByLastNameAndFirstName(user.getLastName(), user.getFirstName()))
+            throw new EntityAlreadyExistsException(List.of("Nom", "Prénom"), List.of(user.getLastName(),user.getFirstName()));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         UserEntity userCreated = userRepository.save(user);
 

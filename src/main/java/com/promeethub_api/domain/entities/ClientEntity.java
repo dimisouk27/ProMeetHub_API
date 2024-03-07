@@ -7,9 +7,7 @@ import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
 
-import java.util.Collection;
 import java.util.List;
 
 
@@ -18,8 +16,8 @@ import java.util.List;
 @Table(name = "\"client\"")
 @NoArgsConstructor
 public class ClientEntity extends UserEntity {
-    @OneToMany(mappedBy = "client")
-    private List<ServiceEntity> services;
+//    @OneToMany(mappedBy = "client")
+//    private List<ServiceTypeEntity> services; ça sera le booking
 
     public ClientEntity(String lastName, String firstName, String email, String password, String phoneNumber,Address address) {
         super(null,lastName, firstName, email, password, phoneNumber, address, UserRole.CLIENT );

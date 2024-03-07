@@ -20,8 +20,8 @@ public class ServiceProviderEntity extends UserEntity {
             joinColumns = @JoinColumn(name = "service_provider_id"),
             inverseJoinColumns = @JoinColumn(name = "service_category_id"))
     private List<ServiceCategoryEntity> categories;
-    @OneToMany(mappedBy = "serviceProvider")
-    private List<ServiceEntity> services;
+    @OneToMany(mappedBy = "serviceProvider", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ServiceTypeEntity> servicesTypes;
 
 
     public ServiceProviderEntity(String lastName, String firstName, String email, String password, String phoneNumber,Address address) {

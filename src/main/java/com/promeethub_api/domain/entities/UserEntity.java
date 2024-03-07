@@ -16,7 +16,14 @@ import java.util.List;
 
 @Setter @Getter
 @Entity
-@Table(name = "\"user\"")
+@Table(
+        name = "\"user\"",
+        uniqueConstraints = @UniqueConstraint(
+        name = "UK_Last_First_Name_ID",
+        columnNames = {
+                "last_name", "first_name"
+        }
+))
 @NoArgsConstructor
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)

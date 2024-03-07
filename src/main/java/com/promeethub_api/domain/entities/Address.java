@@ -16,6 +16,7 @@ public class Address {
     @Column(name = "street_number")
     private int streetNumber;
     private String city;
+    @Column(name = "zip_code")
     private int zipCode;
     private String country;
 

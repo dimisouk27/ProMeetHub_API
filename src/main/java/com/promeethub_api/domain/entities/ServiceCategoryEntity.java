@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ServiceCategoryEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @ManyToOne

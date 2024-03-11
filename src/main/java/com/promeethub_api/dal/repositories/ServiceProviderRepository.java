@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ServiceProviderRepository extends JpaRepository<ServiceProviderEntity, Long>{
-
+    ServiceProviderEntity getByEmail(String email);
 }

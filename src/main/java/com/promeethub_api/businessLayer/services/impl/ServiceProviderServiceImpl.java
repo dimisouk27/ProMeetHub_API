@@ -6,6 +6,7 @@ import com.promeethub_api.businessLayer.services.ServiceCategoryService;
 import com.promeethub_api.businessLayer.services.ServiceTypeService;
 import com.promeethub_api.businessLayer.services.UserService;
 import com.promeethub_api.dal.repositories.ServiceProviderRepository;
+import com.promeethub_api.dal.repositories.ServiceTypeRepository;
 import com.promeethub_api.domain.entities.ServiceProviderEntity;
 import com.promeethub_api.businessLayer.services.ServiceProviderService;
 import com.promeethub_api.domain.entities.ServiceTypeEntity;
@@ -19,6 +20,7 @@ public class ServiceProviderServiceImpl implements ServiceProviderService {
     private final ServiceTypeService serviceTypeService;
     private final ServiceProviderRepository serviceProviderRepository;
     private final ServiceCategoryService serviceCategoryService;
+    private final ServiceTypeRepository serviceTypeRepository;
     private final UserService userService;
     @Override
     public List<ServiceProviderEntity> getAll() {
@@ -69,6 +71,22 @@ public class ServiceProviderServiceImpl implements ServiceProviderService {
 
         return serviceTypeService.create(serviceType) != null;
 
+    }
+
+    @Override
+    public List<ServiceTypeEntity> getMyServiceTypes(String myEmail) {
+        ServiceProviderEntity serviceProvider = (ServiceProviderEntity) userService.findByEmail(myEmail);
+        if(serviceProvider == null)
+            throw new EntityNotFoundException(myEmail, ServiceProviderEntity.class );
+
+
+
+        return serviceTypeRepository.getAllByServiceProvider(serviceProvider);
+    }
+
+    @Override
+    public ServiceProviderEntity getByEmail(String email) {
+        return serviceProviderRepository.getByEmail(email);
     }
 
 
